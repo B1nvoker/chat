@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Operator Dashboard</title>
+    <style>
+      body { margin: 0; font-family: Inter, Arial, sans-serif; }
+      .hidden { display:none !important; }
+      #auth { height:100vh; display:flex; align-items:center; justify-content:center; background:#f8fafc; }
+      #authCard { width:320px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:16px; }
+      #app { display:flex; height:100vh; }
+      #left { width:360px; border-right:1px solid #e5e7eb; display:flex; flex-direction:column; }
+      #toolbar { padding:10px; border-bottom:1px solid #e5e7eb; display:grid; gap:8px; }
+      #convs { flex:1; overflow:auto; }
+      .conv { padding:10px; border-bottom:1px solid #f1f5f9; cursor:pointer; }
+      .conv.active { background:#eff6ff; }
+      .meta { font-size:12px; color:#64748b; }
+      #right { flex:1; display:flex; flex-direction:column; }
+      #header { padding:10px; border-bottom:1px solid #e5e7eb; display:flex; justify-content:space-between; align-items:center; }
+      #messages { flex:1; overflow:auto; padding:12px; background:#f8fafc; }
+      .msg { margin:8px 0; padding:8px 10px; border-radius:10px; max-width:70%; }
+      .msg-user { background:#e2e8f0; }
+      .msg-operator { background:#2563eb; color:#fff; margin-left:auto; }
+      #typing { min-height:20px; font-size:12px; color:#64748b; padding:0 12px; }
+      #composer { display:flex; gap:8px; padding:12px; border-top:1px solid #e5e7eb; }
+      #quickReplies { display:flex; gap:6px; flex-wrap:wrap; padding:0 12px 12px; }
+      #quickReplies button { border:1px solid #cbd5e1; background:#fff; border-radius:999px; padding:6px 10px; cursor:pointer; }
+    </style>
+  </head>
+  <body>
+    <div id="auth">
+      <div id="authCard">
+        <h3>Вход оператора</h3>
+        <input id="email" placeholder="Email" style="width:100%;padding:8px;margin-bottom:8px;" />
+        <input id="password" type="password" placeholder="Пароль" style="width:100%;padding:8px;margin-bottom:8px;" />
+        <button id="login" style="width:100%;padding:9px;">Войти</button>
+        <div id="authErr" style="color:#dc2626;font-size:12px;margin-top:8px;"></div>
+      </div>
+    </div>
+
+    <div id="app" class="hidden">
+      <div id="left">
+        <div id="toolbar">
+          <input id="search" placeholder="Поиск по тексту / телефону" />
+          <select id="filter">
+            <option value="all">Все</option>
+            <option value="new">Новые</option>
+            <option value="in_progress">В работе</option>
+            <option value="closed">Закрытые</option>
+          </select>
+        </div>
+        <div id="convs"></div>
+      </div>
+
+      <div id="right">
+        <div id="header">
+          <div id="currentConv">Выберите диалог</div>
+          <button id="assign">Назначить мне</button>
+        </div>
+        <div id="messages"></div>
+        <div id="typing"></div>
+        <div id="quickReplies"></div>
+        <div id="composer">
+          <input id="input" placeholder="Ответ оператором..." style="flex:1;padding:8px;" />
+          <button id="send">Отправить</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./operator.js"></script>
+  </body>
+</html>
